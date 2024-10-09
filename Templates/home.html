@@ -1,0 +1,54 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Currency Detection App</title>
+    <link rel="stylesheet" href="{% static 'home\styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Fake Currency Detection App</h1>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="/login_page">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="hero">
+            <h2>Secure Your Transactions with Advanced Fake Currency Detection</h2>
+            <p>Using machine learning and image processing techniques, our app helps you detect counterfeit currency with ease.</p>
+            <a href="/login_page" class="btn">Get Started</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="content">
+            <h2>About Our App</h2>
+            <p>This Android app leverages cutting-edge technology to detect fake Indian currency. Capture a note using your phone's camera, and our system will analyze its features to verify its authenticity.</p>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="content">
+            <h2>Features</h2>
+            <ul>
+                <li>Image capture and processing</li>
+                <li>Edge detection and segmentation</li>
+                <li>Comparison with database using BF matcher algorithm</li>
+                <li>Real-time verification</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Fake Currency Detection App. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

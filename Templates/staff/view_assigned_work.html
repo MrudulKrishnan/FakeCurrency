@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Assigned Work</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .work-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .work-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #e74c3c;
+            position: relative;
+        }
+
+        .work-item p {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .work-title {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .deadline {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: #888;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .status {
+            font-size: 12px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .update-status {
+            font-size: 12px;
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        .update-status a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .update-status a:hover {
+            text-decoration: underline;
+        }
+
+        .status-form {
+            margin-top: 10px;
+        }
+
+        .status-form input[type="text"] {
+            padding: 5px;
+            width: calc(100% - 60px);
+            margin-right: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .status-form button {
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .status-form button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="work-container">
+        <h1>Assigned Work</h1>
+        {% for i in work_obj %}
+        <div class="work-item">
+            <p><span class="work-title">{{ i.Work }}</span></p>
+            <p class="description">{{ i.Description }}</p>
+            <p class="status">Status: {{ i.Status }}</p>
+            <span class="deadline">Deadline: {{ i.Deadline }}</span>
+            <br>
+            <br>
+            
+            
+            <!-- Update status form -->
+            <form action="/staff_app/update_works/{{ i.id }}" method="POST" class="status-form">
+                {% csrf_token %}
+                <input type="hidden" name="work_id" value="{{ i.id }}">
+                <input type="text" name="Status" placeholder="Enter new status" required>
+                <br>
+                <br>
+                <button type="submit">Update</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

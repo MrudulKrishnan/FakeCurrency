@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Work to Staff</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        select, textarea, input[type="text"], input[type="date"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Assign Work to Staff</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="staff">Select Staff:</label>
+        <select name="Staff" id="staff" required>
+            <option value="">-- Select Staff Member --</option>
+            {% for i in key %}
+            <option value="{{ i.id }}">{{ i.Firstname }} {{ i.Lastname }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="work">Work:</label>
+        <input name="Work" id="work" style="width: 50ch; height: 3ch; border-color: #ccc;" placeholder="Enter the work" required>
+        
+        <label for="description">Work Description:</label>
+        <textarea name="Description" id="description" rows="5" placeholder="Enter the work details here..." required></textarea>
+
+        <label for="deadline">Deadline:</label>
+        <input type="date" name="Deadline" id="deadline" required>
+        
+        <input type="submit" value="Assign Work">
+    </form>
+
+    <h3>View Assigned Work</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Staff Member</th>
+                <th>Work</th>
+                <th>Description</th>
+                <th>Deadline</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in work %}
+            <tr>
+                <td>{{ assignment.STAFF.Firstname }} {{ assignment.STAFF.Lastname }}</td>
+                <td>{{ assignment.Work }}</td>
+                <td>{{ assignment.Description }}</td>
+                <td>{{ assignment.Deadline }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align: center;">No work assigned yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
